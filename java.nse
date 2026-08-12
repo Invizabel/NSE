@@ -7,7 +7,6 @@ Minecraft Java Server Seeker
 
 author = "Invizabel"
 
-
 portrule = function(host, port)
 	return port.protocol == "tcp"
 		and port.state == "open"
@@ -75,4 +74,3 @@ action = function(host, port)
 	-- Return no response detected --
 	return "No Response"	
 end
-
