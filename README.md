@@ -9,4 +9,6 @@ nmap -Pn -p- --script=java.nse --script-args "java.protocol=776" 192.168.1.1/24
 ```
 nmap -Pn -p 25565 --script=java.nse --script-args "java.protocol=776" 192.168.1.1/24
 ```
+
+#### Notes:
 * Script arguments are optional
