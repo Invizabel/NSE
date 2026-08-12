@@ -48,7 +48,7 @@ action = function(host, port)
 	handshake = handshake .. result
 	
 	local handshake = string.pack(">b", #handshake) .. handshake
-	-- End of handshake  code --
+	-- End of handshake code --
 	
 	-- Send hanshake --
 	s:send(handshake)
