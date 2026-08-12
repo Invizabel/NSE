@@ -2,7 +2,7 @@ local stdnse = require "stdnse"
 
 -- HEAD --
 description = [[
-Minecraft Java Server Seeker
+	Minecraft Java Server Seeker
 ]]
 
 author = "Invizabel"
