@@ -18,7 +18,7 @@ end
 action = function(host, port)
 	-- Create a socket  --
 	local s = nmap.new_socket()
-	s:set_timeout(10000)
+	s:set_timeout(30000)
 	
 	-- Connect to host --
 	local status, error = s:connect(host, port)
