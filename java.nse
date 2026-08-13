@@ -67,7 +67,7 @@ action = function(host, port)
 		local start = data:find("{", 1, true)
 		if start then
 			local out = data:sub(start)
-			return "Host: " .. host.ip .. " | Port: " .. port.number .. " | Response: " .. out
+			return "Address: " .. host.ip .. " | Port: " .. port.number .. " | Response: " .. out
 		end
 	end
 
