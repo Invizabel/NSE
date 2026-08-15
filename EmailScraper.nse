@@ -1,4 +1,5 @@
 local http = require "http"
+local shortport = require "shortport"
 
 -- HEAD --
 description = [[
@@ -6,11 +7,6 @@ description = [[
 ]]
 
 author = "Invizabel"
-
-portrule = function(host, port)
-	return port.protocol == "tcp"
-		and port.state == "open"
-end
 
 local function join_array(arr)
     local seen = {}
@@ -26,10 +22,14 @@ local function join_array(arr)
     return result
 end
 
+portrule = function(host, port)
+    return shortport.http(host, port) or shortport.ssl(host, port)
+end
+
 -- ACTION --
 action = function(host, port)
     local path = "/"
-
+        
     local count = 0
     local emails = {}
     local links = {}
@@ -41,6 +41,8 @@ action = function(host, port)
         }
     }
 
+    options.ssl = port.service == "https"
+        
     while true do
         count = count + 1
 
