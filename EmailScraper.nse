@@ -2,7 +2,7 @@ local http = require "http"
 
 -- HEAD --
 description = [[
-	Web Application OSINT Tool
+	Web Application Email Scraper
 ]]
 
 author = "Invizabel"
