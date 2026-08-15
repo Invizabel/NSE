@@ -1,0 +1,78 @@
+local http = require "http"
+
+-- HEAD --
+description = [[
+	Web Application OSINT Tool
+]]
+
+author = "Invizabel"
+
+portrule = function(host, port)
+	return port.protocol == "tcp"
+		and port.state == "open"
+end
+
+local function join_array(arr)
+    local seen = {}
+    local result = {}
+
+    for _, value in ipairs(arr) do
+        if not seen[value] then
+            seen[value] = true
+            result[#result + 1] = value
+        end
+    end
+
+    return result
+end
+
+-- ACTION --
+action = function(host, port)
+    local path = "/"
+
+    local count = 0
+    local emails = {}
+    local links = {}
+    table.insert(links, path)
+
+    local options = {
+        header = {
+            ["User-Agent"] = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:149.0) Gecko/20100101 Firefox/149.0"
+        }
+    }
+
+    while true do
+        count = count + 1
+
+        links = join_array(links)
+        emails = join_array(emails)
+        
+        if count > #links then
+            break
+        end
+
+        local response = http.get(host.targetname, port.number, links[count], options)
+        
+        if response.status == 200 and response.body then
+            for link in string.gmatch(response.body, 'href="([^"]+)"') do
+                if string.sub(link, 1, 1) == "/" then
+                    table.insert(links, link)
+                end
+            end
+
+            for email in string.gmatch(response.body, "[%w%.%+%-_]+@[%w%-]+%.[%w%-]+[%w%.%-]+") do
+                if email then
+                    email = email:gsub("%.$", "")
+                    table.insert(emails, email)
+                end
+            end
+        end
+    end
+
+    if #emails > 0 then
+        return emails
+    end
+
+    return "No emails found!"
+end
+
