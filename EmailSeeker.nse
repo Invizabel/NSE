@@ -40,8 +40,6 @@ action = function(host, port)
             ["User-Agent"] = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:149.0) Gecko/20100101 Firefox/149.0"
         }
     }
-
-    options.ssl = port.service == "https"
         
     while true do
         count = count + 1
@@ -70,14 +68,14 @@ action = function(host, port)
                 end
             end
 
-            for email in string.gmatch(response.body, "[%l%d][%l%d%.]+@[%w%-]+%.[%w%-]+[%w%.%-]+@[%l][%l%d]+%.[%l%d]+[%l%d%.]+|[%l%d][%l%d%.]+") do
+            for email in string.gmatch(response.body, "[%l%d][%l%d%.]+@[%w%-]+%.[%w%-]+[%w%.%-]+@[%l][%l%d]+%.[%l%d]+[%l%d%.]+") do
                 if email then
                     email = email:gsub("%.$", "")
                     table.insert(emails, email)
                 end
             end
 
-			 for email in string.gmatch(response.body, "[%l%d][%l%d%.]+@[%w%-]+%.[%w%-]+[%w%.%-]+.+at.+[%l][%l%d]+%.[%l%d]+[%l%d%.]+|[%l%d][%l%d%.]+") do
+			 for email in string.gmatch(response.body, "[%l%d][%l%d%.]+@[%w%-]+%.[%w%-]+[%w%.%-]+.+at.+[%l][%l%d]+%.[%l%d]+[%l%d%.]+") do
                 if email then
                     email = email:gsub("%.$", "")
                     table.insert(emails, email)
