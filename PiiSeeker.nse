@@ -87,7 +87,7 @@ action = function(host, port)
             end
 
 			-- Grab phone numbers --
-            for phome in string.gmatch(response.body, "tel%:%+?[%d%-]{10,11}") do
+            for phome in string.gmatch(response.body, "tel%:%+?[%d%-]{10,12}") do
                 if phome then
                     phome = phome:gsub("%.$", "")
                     table.insert(pii, phome)
