@@ -76,6 +76,13 @@ action = function(host, port)
                     table.insert(emails, email)
                 end
             end
+
+			for email in string.gmatch(response.body, "[%l%d][%l%d%.]+[%(%{%[%<]at[%)%}%]%>][%l][%l%d]+%.[%l%d%.]+") do
+                if email then
+                    email = email:gsub("%.$", "")
+                    table.insert(emails, email)
+                end
+            end
         end
     end
 
