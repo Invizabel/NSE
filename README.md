@@ -3,5 +3,5 @@
 #### ServerSeeker:
 * Minecraft Java Server Seeker
 
-#### EmailScraper:
-* Web Application Email Scraper
+#### PiiSeeker:
+* Web Application Pii Seeker
