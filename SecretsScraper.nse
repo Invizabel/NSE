@@ -3,7 +3,7 @@ local shortport = require "shortport"
 
 -- HEAD --
 description = [[
-	Web Application Sensitive Information Seeker
+	Web Application Sensitive Information Scraper
 ]]
 
 author = "Invizabel"
