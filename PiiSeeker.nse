@@ -47,7 +47,7 @@ action = function(host, port)
         count = count + 1
 
         links = join_array(links)
-        emails = join_array(emails)
+        pii = join_array(pii)
         
         if count > #links then
             break
