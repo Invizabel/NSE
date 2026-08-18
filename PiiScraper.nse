@@ -129,7 +129,7 @@ action = function(host, port)
 			for ip_address in string.gmatch(response.body, "10%.%d%d%d.%d%d%d.%d%d%d") do
                 if ip_address then
 					is_valid = true
-					verify = mysplit(ip_address)
+					verify = mysplit(ip_address, ".")
 					for _, value in ipairs(verify) do
 						if tonumber(value) < 1 or tonumber(value) > 254 then
 							is_valid = false
@@ -146,7 +146,7 @@ action = function(host, port)
 			for ip_address in string.gmatch(response.body, "172%.%d%d.%d%d%d.%d%d%d") do
                 if ip_address then
 					is_valid = true
-					verify = mysplit(ip_address)
+					verify = mysplit(ip_address, ".")
 					for _, value in ipairs(verify) do
 						if tonumber(value) < 1 or tonumber(value) > 254 then
 							is_valid = false
@@ -163,7 +163,7 @@ action = function(host, port)
 			for ip_address in string.gmatch(response.body, "192%.168.%d%d%d.%d%d%d") do
 				if ip_address then
 					is_valid = true
-					verify = mysplit(ip_address)
+					verify = mysplit(ip_address, ".")
 					for _, value in ipairs(verify) do
 						if tonumber(value) < 1 or tonumber(value) > 254 then
 							is_valid = false
