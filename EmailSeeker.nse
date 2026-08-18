@@ -39,6 +39,8 @@ action = function(host, port)
         header = {
             ["User-Agent"] = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:149.0) Gecko/20100101 Firefox/149.0"
         }
+
+		no_cache = {max_cache == "0"}
     }
         
     while true do
