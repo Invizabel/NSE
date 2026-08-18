@@ -4,4 +4,4 @@
 * Minecraft Java Server Seeker
 
 #### WebSeeker:
-* Web Application Sensitive Scraper
+* Web Application Sensitive Information Seeker
