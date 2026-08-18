@@ -3,5 +3,5 @@
 #### ServerSeeker:
 * Minecraft Java Server Seeker
 
-#### SecretsScraper:
-* Web Application Sensitive Information Scraper
+#### PiiScraper:
+* Web Application PII Scraper
