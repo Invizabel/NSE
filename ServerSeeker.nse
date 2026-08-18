@@ -53,7 +53,8 @@ local function recieve_packet(socket)
 end
 
 portrule = function(host, port)
-    return shortport.http(host, port) or shortport.ssl(host, port)
+	return port.protocol == "tcp"
+		and port.state == "open"
 end
 
 -- ACTION --
