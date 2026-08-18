@@ -56,7 +56,15 @@ action = function(host, port)
         local response = http.get(host.targetname, port.number, links[count], options)
         
         if response.status == 200 and response.body then
+			-- href --
             for link in string.gmatch(response.body, 'href="([^"]+)"') do
+                if string.sub(link, 1, 1) == "/" then
+                    table.insert(links, link)
+                end
+            end
+
+			-- src --
+            for link in string.gmatch(response.body, 'src="([^"]+)"') do
                 if string.sub(link, 1, 1) == "/" then
                     table.insert(links, link)
                 end
