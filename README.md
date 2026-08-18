@@ -3,5 +3,5 @@
 #### MinecraftSeeker:
 * Minecraft Java Server Seeker
 
-#### WebSeeker:
+#### SecretSeeker:
 * Web Application Sensitive Information Seeker
