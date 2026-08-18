@@ -126,7 +126,7 @@ action = function(host, port)
             end
 
 			-- Grab local IP address --
-			for ip_address in string.gmatch(response.body, "10%.%d%d%d.%d%d%d.%d%d%d") do
+			for ip_address in string.gmatch(response.body, "10%.%d%d%d%.%d%d%d%.%d%d%d") do
                 if ip_address then
 					is_valid = true
 					verify = mysplit(ip_address, ".")
@@ -147,7 +147,7 @@ action = function(host, port)
             end
 
 			-- Grab local IP address --
-			for ip_address in string.gmatch(response.body, "172%.%d%d.%d%d%d.%d%d%d") do
+			for ip_address in string.gmatch(response.body, "172%.%d%d%.%d%d%d%.%d%d%d") do
                 if ip_address then
 					is_valid = true
 					verify = mysplit(ip_address, ".")
@@ -168,7 +168,7 @@ action = function(host, port)
             end
 
 			-- Grab local IP address --
-			for ip_address in string.gmatch(response.body, "192%.168.%d%d%d.%d%d%d") do
+			for ip_address in string.gmatch(response.body, "192%.168%.%d%d%d%.%d%d%d") do
 				if ip_address then
 					is_valid = true
 					verify = mysplit(ip_address, ".")
