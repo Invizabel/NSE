@@ -22,6 +22,17 @@ local function join_array(arr)
     return result
 end
 
+local function mysplit(inputstr, sep)
+	if sep == nil then
+		sep = "%s"
+	end
+	local t = {}
+	for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+		table.insert(t, str)
+	end
+	return t
+end
+
 portrule = function(host, port)
     return shortport.http(host, port) or shortport.ssl(host, port)
 end
@@ -113,6 +124,56 @@ action = function(host, port)
                     table.insert(pii, phone)
                 end
             end
+
+			-- Grab local IP address --
+			for ip_address in string.gmatch(response.body, "10%.%d%d%d.%d%d%d.%d%d%d") do
+                if ip_address then
+					is_valid = true
+					verify = mysplit(ip_address)
+					for i in verify do
+						if i < 1 or i > 254 then
+							is_valid = false
+							break
+						end
+					end
+					if is_valid then
+                    	table.insert(pii, ip_address)
+					end
+                end
+            end
+
+			-- Grab local IP address --
+			for ip_address in string.gmatch(response.body, "172%.%d%d.%d%d%d.%d%d%d") do
+                if ip_address then
+					is_valid = true
+					verify = mysplit(ip_address)
+					for i in verify do
+						if i < 1 or i > 254 then
+							is_valid = false
+							break
+						end
+					end
+					if is_valid and verify[1] >= 16 and verify[1] <= 31 then
+                    	table.insert(pii, ip_address)
+					end
+                end
+            end
+
+		-- Grab local IP address --
+		for ip_address in string.gmatch(response.body, "192%.168.%d%d%d.%d%d%d") do
+			if ip_address then
+				is_valid = true
+				verify = mysplit(ip_address)
+				for i in verify do
+					if i < 1 or i > 254 then
+						is_valid = false
+						break
+					end
+				end
+				if is_valid then
+					table.insert(pii, ip_address)
+				end
+			end
         end
     end
 
