@@ -74,119 +74,120 @@ action = function(host, port)
                 end
             end
 
-			-- src --
+	    -- src --
             for link in string.gmatch(response.body, 'src="([^"]+)"') do
                 if string.sub(link, 1, 1) == "/" then
                     table.insert(links, link)
                 end
             end
 
-			-- Grab emails --
-            for email in string.gmatch(response.body, "[%l%d][%l%d%.]+@[%l][%l%d]+%.[%l%d%.]+") do
+	    -- Grab emails --
+            for email in string.gmatch(response.body, "[%a%d][%l%d%.]+@[%l][%l%d]+%.[%l%d%.]+") do
                 if email then
                     email = email:gsub("%.$", "")
                     table.insert(secrets, email)
                 end
             end
 
-			-- Grab emails --
-			for email in string.gmatch(response.body, "[%l%d][%l%d%.]+[%(%{%[%<]at[%)%}%]%>][%l][%l%d]+%.[%l%d%.]+") do
+            -- Grab emails --
+            for email in string.gmatch(response.body, "[%a%d][%l%d%.]+[%(%{%[%<]at[%)%}%]%>][%l][%l%d]+%.[%l%d%.]+") do
                 if email then
                     email = email:gsub("%.$", "")
                     table.insert(secrets, email)
                 end
             end
 
-			-- Grab phone numbers --
+	    -- Grab phone numbers --
             for phone in string.gmatch(response.body, "tel%:%+?[%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-]") do
                 if phone then
                     table.insert(secrets, phone)
                 end
             end
 
-			-- Grab phone numbers --
-			for phone in string.gmatch(response.body, "%(%d%d%%d)%-%d%d%d%-%d%d%d%d") do
+            -- Grab phone numbers --
+	    for phone in string.gmatch(response.body, "%(%d%d%%d)%-%d%d%d%-%d%d%d%d") do
                 if phone then
                     table.insert(secrets, phone)
                 end
             end
 
-			-- Grab phone numbers --
-			for phone in string.gmatch(response.body, "%(%d%d%d%) %d%d%d%-%d%d%d%d") do
+	    -- Grab phone numbers --
+	    for phone in string.gmatch(response.body, "%(%d%d%d%) %d%d%d%-%d%d%d%d") do
                 if phone then
                     table.insert(secrets, phone)
                 end
             end
 
-			-- Grab phone numbers --
-			for phone in string.gmatch(response.body, "%d%d%d%-%d%d%d%-%d%d%d%d") do
+	    -- Grab phone numbers --
+	    for phone in string.gmatch(response.body, "%d%d%d%-%d%d%d%-%d%d%d%d") do
                 if phone then
                     table.insert(secrets, phone)
                 end
             end
 
-			-- Grab local IP address --
-			for ip_address in string.gmatch(response.body, "10%.%d%d%d%.%d%d%d%.%d%d%d") do
+	    -- Grab local IP address --
+	    for ip_address in string.gmatch(response.body, "10%.%d%d%d%.%d%d%d%.%d%d%d") do
                 if ip_address then
-					is_valid = true
-					verify = mysplit(ip_address, ".")
-					if verify then
-						for _, value in ipairs(verify) do
-							if value then
-								if tonumber(value) < 1 or tonumber(value) > 254 then
-									is_valid = false
-									break
-								end
-							end
-						end
-						if is_valid then
-	                    	table.insert(secrets, ip_address)
-						end
-					end
+                    is_valid = true
+                    verify = mysplit(ip_address, ".")
+                    if verify then
+                        for _, value in ipairs(verify) do
+                            if value then
+                                if tonumber(value) < 1 or tonumber(value) > 254 then
+                                    is_valid = false
+                                    break
+                                end
+                            end
+                        end
+                        if is_valid then
+                            table.insert(secrets, ip_address)
+                        end
+                    end
                 end
             end
 
-			-- Grab local IP address --
-			for ip_address in string.gmatch(response.body, "172%.%d%d%.%d%d%d%.%d%d%d") do
+            -- Grab local IP address --
+	    for ip_address in string.gmatch(response.body, "172%.%d%d%d%.%d%d%d%.%d%d%d") do
                 if ip_address then
-					is_valid = true
-					verify = mysplit(ip_address, ".")
-					if verify then
-						for _, value in ipairs(verify) do
-							if value then
-								if tonumber(value) < 1 or tonumber(value) > 254 then
-									is_valid = false
-									break
-								end
-							end
-						end
-						if is_valid and tonumber(verify[1]) >= 16 and tonumber(verify[1]) <= 31 then
-	                    	table.insert(secrets, ip_address)
-						end
-					end
+                    is_valid = true
+                    verify = mysplit(ip_address, ".")
+                    if verify then
+                        for _, value in ipairs(verify) do
+                            if value then
+                                if tonumber(value) < 1 or tonumber(value) > 254 then
+                                    is_valid = false
+                                    break
+                                end
+                            end
+                        end
+                        if is_valid and tonumber(verify[1]) >= 16 and tonumber(verify[1]) <= 31 then
+                            table.insert(secrets, ip_address)
+                        end
+                    end
                 end
             end
 
-			-- Grab local IP address --
-			for ip_address in string.gmatch(response.body, "192%.168%.%d%d%d%.%d%d%d") do
-				if ip_address then
-					is_valid = true
-					verify = mysplit(ip_address, ".")
-					if verify then
-						for _, value in ipairs(verify) do
-							if value then
-								if tonumber(value) < 1 or tonumber(value) > 254 then
-									is_valid = false
-									break
-								end
-							end
-						end
-						if is_valid then
-							table.insert(secrets, ip_address)
-						end
-					end
-				end
-			end
+            -- Grab local IP address --
+	    for ip_address in string.gmatch(response.body, "192%.168%.%d%d%d%.%d%d%d") do
+                if ip_address then
+                    is_valid = true
+                    verify = mysplit(ip_address, ".")
+                    if verify then
+                        for _, value in ipairs(verify) do
+                            if value then
+                                if tonumber(value) < 1 or tonumber(value) > 254 then
+                                    is_valid = false
+                                    break
+                                end
+                            end
+                        end
+                        if is_valid and tonumber(verify[1]) >= 16 and tonumber(verify[1]) <= 31 then
+                            table.insert(secrets, ip_address)
+                        end
+                    end
+                end
+            end
+
         end
     end
 
