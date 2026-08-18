@@ -1,5 +1,4 @@
 local stdnse = require "stdnse"
-local shortport = require "shortport"
 
 -- HEAD --
 description = [[
