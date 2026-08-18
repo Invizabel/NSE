@@ -87,34 +87,30 @@ action = function(host, port)
             end
 
 			-- Grab phone numbers --
-            for phome in string.gmatch(response.body, "tel%:%+?[%d%-]{10,12}") do
-                if phome then
-                    phome = phome:gsub("%.$", "")
-                    table.insert(pii, phome)
+            for phone in string.gmatch(response.body, "tel%:%+?[%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-]") do
+                if phone then
+                    table.insert(pii, phone)
                 end
             end
 
 			-- Grab phone numbers --
-			for phome in string.gmatch(response.body, "%(%d{3}%)%-%d{3}%-%d{4}") do
-                if phome then
-                    phome = phome:gsub("%.$", "")
-                    table.insert(pii, phome)
+			for phone in string.gmatch(response.body, "%(%d%d%%d)%-%d%d%d%-%d%d%d%d") do
+                if phone then
+                    table.insert(pii, phone)
                 end
             end
 
 			-- Grab phone numbers --
-			for phome in string.gmatch(response.body, "%(%d{3}%) %d{3}%-%d{4}") do
-                if phome then
-                    phome = phome:gsub("%.$", "")
-                    table.insert(pii, phome)
+			for phone in string.gmatch(response.body, "%(%d%d%d%) %d%d%d%-%d%d%d%d") do
+                if phone then
+                    table.insert(pii, phone)
                 end
             end
 
 			-- Grab phone numbers --
-			for phome in string.gmatch(response.body, "%d{3}%-%d{3}%-%d{4}") do
-                if phome then
-                    phome = phome:gsub("%.$", "")
-                    table.insert(pii, phome)
+			for phone in string.gmatch(response.body, "%d%d%d%-%d%d%d%-%d%d%d%d") do
+                if phone then
+                    table.insert(pii, phone)
                 end
             end
         end
