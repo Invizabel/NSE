@@ -3,5 +3,5 @@
 #### ServerSeeker:
 * Minecraft Java Server Seeker
 
-#### PiiScraper:
-* Web Application PII Scraper
+#### chaff:
+* Web Application PII and Secrets Scraper
