@@ -130,16 +130,18 @@ action = function(host, port)
                 if ip_address then
 					is_valid = true
 					verify = mysplit(ip_address, ".")
-					for _, value in ipairs(verify) do
-						if value then
-							if tonumber(value) < 1 or tonumber(value) > 254 then
-								is_valid = false
-								break
+					if verify then
+						for _, value in ipairs(verify) do
+							if value then
+								if tonumber(value) < 1 or tonumber(value) > 254 then
+									is_valid = false
+									break
+								end
 							end
 						end
-					end
-					if is_valid then
-                    	table.insert(pii, ip_address)
+						if is_valid then
+	                    	table.insert(pii, ip_address)
+						end
 					end
                 end
             end
@@ -149,16 +151,18 @@ action = function(host, port)
                 if ip_address then
 					is_valid = true
 					verify = mysplit(ip_address, ".")
-					for _, value in ipairs(verify) do
-						if value then
-							if tonumber(value) < 1 or tonumber(value) > 254 then
-								is_valid = false
-								break
+					if verify then
+						for _, value in ipairs(verify) do
+							if value then
+								if tonumber(value) < 1 or tonumber(value) > 254 then
+									is_valid = false
+									break
+								end
 							end
 						end
-					end
-					if is_valid and tonumber(verify[1]) >= 16 and tonumber(verify[1]) <= 31 then
-                    	table.insert(pii, ip_address)
+						if is_valid and tonumber(verify[1]) >= 16 and tonumber(verify[1]) <= 31 then
+	                    	table.insert(pii, ip_address)
+						end
 					end
                 end
             end
@@ -168,16 +172,18 @@ action = function(host, port)
 				if ip_address then
 					is_valid = true
 					verify = mysplit(ip_address, ".")
-					for _, value in ipairs(verify) do
-						if value then
-							if tonumber(value) < 1 or tonumber(value) > 254 then
-								is_valid = false
-								break
+					if verify then
+						for _, value in ipairs(verify) do
+							if value then
+								if tonumber(value) < 1 or tonumber(value) > 254 then
+									is_valid = false
+									break
+								end
 							end
 						end
-					end
-					if is_valid then
-						table.insert(pii, ip_address)
+						if is_valid then
+							table.insert(pii, ip_address)
+						end
 					end
 				end
 			end
