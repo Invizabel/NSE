@@ -31,7 +31,7 @@ action = function(host, port)
     local path = "/"
         
     local count = 0
-    local emails = {}
+    local pii = {}
     local links = {}
     table.insert(links, path)
 
@@ -70,26 +70,60 @@ action = function(host, port)
                 end
             end
 
+			-- Grab emails --
             for email in string.gmatch(response.body, "[%l%d][%l%d%.]+@[%l][%l%d]+%.[%l%d%.]+") do
                 if email then
                     email = email:gsub("%.$", "")
-                    table.insert(emails, email)
+                    table.insert(pii, email)
                 end
             end
 
+			-- Grab emails --
 			for email in string.gmatch(response.body, "[%l%d][%l%d%.]+[%(%{%[%<]at[%)%}%]%>][%l][%l%d]+%.[%l%d%.]+") do
                 if email then
                     email = email:gsub("%.$", "")
-                    table.insert(emails, email)
+                    table.insert(pii, email)
+                end
+            end
+
+			-- Grab phone numbers --
+            for phome in string.gmatch(response.body, "tel%:%+?%d{10,11}") do
+                if phome then
+                    phome = phome:gsub("%.$", "")
+                    table.insert(pii, phome)
+                end
+            end
+
+			-- Grab phone numbers --
+			for phome in string.gmatch(response.body, "%(%d{3}%)%-%d{3}%-%d{4}") do
+                if phome then
+                    phome = phome:gsub("%.$", "")
+                    table.insert(pii, phome)
+                end
+            end
+
+			-- Grab phone numbers --
+			for phome in string.gmatch(response.body, "%(%d{3}%) %d{3}%-%d{4}") do
+                if phome then
+                    phome = phome:gsub("%.$", "")
+                    table.insert(pii, phome)
+                end
+            end
+
+			-- Grab phone numbers --
+			for phome in string.gmatch(response.body, "%d{3}%-%d{3}%-%d{4}") do
+                if phome then
+                    phome = phome:gsub("%.$", "")
+                    table.insert(pii, phome)
                 end
             end
         end
     end
 
-    if #emails > 0 then
-        return emails
+    if #pii > 0 then
+        return pii
     end
 
-    return "No emails found!"
+    return "No pii found!"
 end
 
