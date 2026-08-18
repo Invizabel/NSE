@@ -70,14 +70,14 @@ action = function(host, port)
                 end
             end
 
-            for email in string.gmatch(response.body, "[%l%d][%l%d\.]+@[%w%-]+%.[%w%-]+[%w%.%-]+@[%l][%l%d]+\.[%l%d]+[%l%d\.]+|[%l%d][%l%d\.]+") do
+            for email in string.gmatch(response.body, "[%l%d][%l%d%.]+@[%w%-]+%.[%w%-]+[%w%.%-]+@[%l][%l%d]+%.[%l%d]+[%l%d%.]+|[%l%d][%l%d%.]+") do
                 if email then
                     email = email:gsub("%.$", "")
                     table.insert(emails, email)
                 end
             end
 
-			 for email in string.gmatch(response.body, "[%l%d][%l%d\.]+@[%w%-]+%.[%w%-]+[%w%.%-]+.+at.+[%l][%l%d]+\.[%l%d]+[%l%d\.]+|[%l%d][%l%d\.]+") do
+			 for email in string.gmatch(response.body, "[%l%d][%l%d%.]+@[%w%-]+%.[%w%-]+[%w%.%-]+.+at.+[%l][%l%d]+%.[%l%d]+[%l%d%.]+|[%l%d][%l%d%.]+") do
                 if email then
                     email = email:gsub("%.$", "")
                     table.insert(emails, email)
