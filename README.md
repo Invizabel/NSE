@@ -1,6 +1,6 @@
 ## NMAP NSE Scripts
 
-#### server-seeker:
+#### mc-server-seeker:
 * Minecraft Java Server Seeker
 
 #### secrets-hunter:
