@@ -130,8 +130,8 @@ action = function(host, port)
                 if ip_address then
 					is_valid = true
 					verify = mysplit(ip_address)
-					for i in verify do
-						if i < 1 or i > 254 then
+					for _, value in ipairs(verify) do
+						if value < 1 or value > 254 then
 							is_valid = false
 							break
 						end
@@ -147,8 +147,8 @@ action = function(host, port)
                 if ip_address then
 					is_valid = true
 					verify = mysplit(ip_address)
-					for i in verify do
-						if i < 1 or i > 254 then
+					for _, value in ipairs(verify) do
+						if value < 1 or value > 254 then
 							is_valid = false
 							break
 						end
@@ -164,8 +164,8 @@ action = function(host, port)
 				if ip_address then
 					is_valid = true
 					verify = mysplit(ip_address)
-					for i in verify do
-						if i < 1 or i > 254 then
+					for _, value in ipairs(verify) do
+						if value < 1 or value > 254 then
 							is_valid = false
 							break
 						end
