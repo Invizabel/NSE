@@ -1,6 +1,6 @@
 ## NMAP NSE Scripts
 
-#### JavaSeeker:
+#### MinecraftSeeker:
 * Minecraft Java Server Seeker
 
 #### WebSeeker:
