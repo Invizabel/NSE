@@ -42,7 +42,7 @@ action = function(host, port)
     local path = "/"
         
     local count = 0
-    local pii = {}
+    local secrets = {}
     local links = {}
     table.insert(links, path)
 
@@ -58,7 +58,7 @@ action = function(host, port)
         count = count + 1
 
         links = join_array(links)
-        pii = join_array(pii)
+        secrets = join_array(secrets)
         
         if count > #links then
             break
@@ -85,7 +85,7 @@ action = function(host, port)
             for email in string.gmatch(response.body, "[%l%d][%l%d%.]+@[%l][%l%d]+%.[%l%d%.]+") do
                 if email then
                     email = email:gsub("%.$", "")
-                    table.insert(pii, email)
+                    table.insert(secrets, email)
                 end
             end
 
@@ -93,35 +93,35 @@ action = function(host, port)
 			for email in string.gmatch(response.body, "[%l%d][%l%d%.]+[%(%{%[%<]at[%)%}%]%>][%l][%l%d]+%.[%l%d%.]+") do
                 if email then
                     email = email:gsub("%.$", "")
-                    table.insert(pii, email)
+                    table.insert(secrets, email)
                 end
             end
 
 			-- Grab phone numbers --
             for phone in string.gmatch(response.body, "tel%:%+?[%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-]") do
                 if phone then
-                    table.insert(pii, phone)
+                    table.insert(secrets, phone)
                 end
             end
 
 			-- Grab phone numbers --
 			for phone in string.gmatch(response.body, "%(%d%d%%d)%-%d%d%d%-%d%d%d%d") do
                 if phone then
-                    table.insert(pii, phone)
+                    table.insert(secrets, phone)
                 end
             end
 
 			-- Grab phone numbers --
 			for phone in string.gmatch(response.body, "%(%d%d%d%) %d%d%d%-%d%d%d%d") do
                 if phone then
-                    table.insert(pii, phone)
+                    table.insert(secrets, phone)
                 end
             end
 
 			-- Grab phone numbers --
 			for phone in string.gmatch(response.body, "%d%d%d%-%d%d%d%-%d%d%d%d") do
                 if phone then
-                    table.insert(pii, phone)
+                    table.insert(secrets, phone)
                 end
             end
 
@@ -140,7 +140,7 @@ action = function(host, port)
 							end
 						end
 						if is_valid then
-	                    	table.insert(pii, ip_address)
+	                    	table.insert(secrets, ip_address)
 						end
 					end
                 end
@@ -161,7 +161,7 @@ action = function(host, port)
 							end
 						end
 						if is_valid and tonumber(verify[1]) >= 16 and tonumber(verify[1]) <= 31 then
-	                    	table.insert(pii, ip_address)
+	                    	table.insert(secrets, ip_address)
 						end
 					end
                 end
@@ -182,7 +182,7 @@ action = function(host, port)
 							end
 						end
 						if is_valid then
-							table.insert(pii, ip_address)
+							table.insert(secrets, ip_address)
 						end
 					end
 				end
@@ -190,10 +190,10 @@ action = function(host, port)
         end
     end
 
-    if #pii > 0 then
-        return pii
+    if #secrets > 0 then
+        return secrets
     end
 
-    return "No pii found!"
+    return "No secrets found!"
 end
 
