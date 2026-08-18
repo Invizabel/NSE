@@ -159,19 +159,20 @@ action = function(host, port)
                 end
             end
 
-		-- Grab local IP address --
-		for ip_address in string.gmatch(response.body, "192%.168.%d%d%d.%d%d%d") do
-			if ip_address then
-				is_valid = true
-				verify = mysplit(ip_address)
-				for i in verify do
-					if i < 1 or i > 254 then
-						is_valid = false
-						break
+			-- Grab local IP address --
+			for ip_address in string.gmatch(response.body, "192%.168.%d%d%d.%d%d%d") do
+				if ip_address then
+					is_valid = true
+					verify = mysplit(ip_address)
+					for i in verify do
+						if i < 1 or i > 254 then
+							is_valid = false
+							break
+						end
 					end
-				end
-				if is_valid then
-					table.insert(pii, ip_address)
+					if is_valid then
+						table.insert(pii, ip_address)
+					end
 				end
 			end
         end
