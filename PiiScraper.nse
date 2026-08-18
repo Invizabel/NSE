@@ -1,4 +1,3 @@
-local stdnse = require "stdnse"
 local http = require "http"
 local shortport = require "shortport"
 
@@ -132,7 +131,7 @@ action = function(host, port)
 					is_valid = true
 					verify = mysplit(ip_address)
 					for _, value in ipairs(verify) do
-						if stdnse.tonumber(value) < 1 or stdnse.tonumber(value) > 254 then
+						if tonumber(value) < 1 or tonumber(value) > 254 then
 							is_valid = false
 							break
 						end
@@ -149,12 +148,12 @@ action = function(host, port)
 					is_valid = true
 					verify = mysplit(ip_address)
 					for _, value in ipairs(verify) do
-						if stdnse.tonumber(value) < 1 or stdnse.tonumber(value) > 254 then
+						if tonumber(value) < 1 or tonumber(value) > 254 then
 							is_valid = false
 							break
 						end
 					end
-					if is_valid and stdnse.tonumber(verify[1]) >= 16 and stdnse.tonumber(verify[1]) <= 31 then
+					if is_valid and tonumber(verify[1]) >= 16 and tonumber(verify[1]) <= 31 then
                     	table.insert(pii, ip_address)
 					end
                 end
@@ -166,7 +165,7 @@ action = function(host, port)
 					is_valid = true
 					verify = mysplit(ip_address)
 					for _, value in ipairs(verify) do
-						if stdnse.tonumber(value) < 1 or stdnse.tonumber(value) > 254 then
+						if tonumber(value) < 1 or tonumber(value) > 254 then
 							is_valid = false
 							break
 						end
