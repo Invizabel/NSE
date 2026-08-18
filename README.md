@@ -1,7 +1,7 @@
 ## NMAP NSE Scripts
 
-#### ServerSeeker:
+#### JavaSeeker:
 * Minecraft Java Server Seeker
 
-#### PiiSeeker:
-* Web Application Pii Seeker
+#### WebSeeker:
+* Web Application Sensitive Scraper
