@@ -126,14 +126,14 @@ action = function(host, port)
             end
 
 	    -- Grab local IP address --
-	    for ip_address in string.gmatch(response.body, "10%.%d%d%d%.%d%d%d%.%d%d%d") do
+	    for ip_address in string.gmatch(response.body, "10%.%d+%.%d+%.%d+") do
                 if ip_address then
                     is_valid = true
                     verify = mysplit(ip_address, ".")
                     if verify then
                         for _, value in ipairs(verify) do
                             if value then
-                                if tonumber(value) < 1 or tonumber(value) > 254 then
+                                if tonumber(value) < 0 or tonumber(value) > 254 then
                                     is_valid = false
                                     break
                                 end
@@ -147,20 +147,20 @@ action = function(host, port)
             end
 
             -- Grab local IP address --
-	    for ip_address in string.gmatch(response.body, "172%.%d%d%d%.%d%d%d%.%d%d%d") do
+	    for ip_address in string.gmatch(response.body, "172%.%d+%.%d+%.%d+") do
                 if ip_address then
                     is_valid = true
                     verify = mysplit(ip_address, ".")
                     if verify then
                         for _, value in ipairs(verify) do
                             if value then
-                                if tonumber(value) < 1 or tonumber(value) > 254 then
+                                if tonumber(value) < 0 or tonumber(value) > 254 then
                                     is_valid = false
                                     break
                                 end
                             end
                         end
-                        if is_valid and tonumber(verify[1]) >= 16 and tonumber(verify[1]) <= 31 then
+                        if is_valid and tonumber(verify[2]) >= 16 and tonumber(verify[2]) <= 31 then
                             table.insert(secrets, ip_address)
                         end
                     end
@@ -168,20 +168,20 @@ action = function(host, port)
             end
 
             -- Grab local IP address --
-	    for ip_address in string.gmatch(response.body, "192%.168%.%d%d%d%.%d%d%d") do
+	    for ip_address in string.gmatch(response.body, "192%.168%.%d+%.%d+") do
                 if ip_address then
                     is_valid = true
                     verify = mysplit(ip_address, ".")
                     if verify then
                         for _, value in ipairs(verify) do
                             if value then
-                                if tonumber(value) < 1 or tonumber(value) > 254 then
+                                if tonumber(value) < 0 or tonumber(value) > 254 then
                                     is_valid = false
                                     break
                                 end
                             end
                         end
-                        if is_valid and tonumber(verify[1]) >= 16 and tonumber(verify[1]) <= 31 then
+                        if is_valid then
                             table.insert(secrets, ip_address)
                         end
                     end
