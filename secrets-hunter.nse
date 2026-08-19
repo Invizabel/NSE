@@ -187,7 +187,6 @@ action = function(host, port)
                     end
                 end
             end
-
         end
     end
 
