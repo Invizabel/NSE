@@ -74,56 +74,58 @@ action = function(host, port)
                 end
             end
 
-	    -- src --
-            for link in string.gmatch(response.body, 'src="([^"]+)"') do
-                if string.sub(link, 1, 1) == "/" then
-                    table.insert(links, link)
-                end
-            end
-
-	    -- Grab emails --
-            for email in string.gmatch(response.body, "[%a%d][%l%d%.]+@[%l][%l%d]+%.[%l%d%.]+") do
-                if email then
-                    email = email:gsub("%.$", "")
-                    table.insert(contacts, email)
-                end
-            end
-
-            -- Grab emails --
-            for email in string.gmatch(response.body, "[%a%d][%l%d%.]+[%(%{%[%<]at[%)%}%]%>][%l][%l%d]+%.[%l%d%.]+") do
-                if email then
-                    email = email:gsub("%.$", "")
-                    table.insert(contacts, email)
-                end
-            end
-
-	    -- Grab phone numbers --
-            for phone in string.gmatch(response.body, "tel%:%+?[%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-]") do
-                if phone then
-                    table.insert(contacts, phone)
-                end
-            end
-
-            -- Grab phone numbers --
-	    for phone in string.gmatch(response.body, "%(%d%d%%d)%-%d%d%d%-%d%d%d%d") do
-                if phone then
-                    table.insert(contacts, phone)
-                end
-            end
-
-	    -- Grab phone numbers --
-	    for phone in string.gmatch(response.body, "%(%d%d%d%) %d%d%d%-%d%d%d%d") do
-                if phone then
-                    table.insert(contacts, phone)
-                end
-            end
-
-	    -- Grab phone numbers --
-	    for phone in string.gmatch(response.body, "%d%d%d%-%d%d%d%-%d%d%d%d") do
-                if phone then
-                    table.insert(contacts, phone)
-                end
-            end
+		    -- src --
+			for link in string.gmatch(response.body, 'src="([^"]+)"') do
+				if string.sub(link, 1, 1) == "/" then
+					table.insert(links, link)
+				end
+	        end
+	
+		    -- Grab emails --
+			for email in string.gmatch(response.body, "[%a%d][%l%d%.]+@[%l][%l%d]+%.[%l%d%.]+") do
+				if email then
+					email = email:gsub("%.$", "")
+					table.insert(contacts, email)
+				end
+			end
+	
+			-- Grab emails --
+			for email in string.gmatch(response.body, "[%a%d][%l%d%.]+[%(%{%[%<]at[%)%}%]%>][%l][%l%d]+%.[%l%d%.]+") do
+				if email then
+					email = email:gsub("%.$", "")
+					table.insert(contacts, email)
+				end
+			end
+	
+		    -- Grab phone numbers --
+			for phone in string.gmatch(response.body, "tel%:%+?[%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-][%d%-]") do
+				if phone then
+					table.insert(contacts, phone)
+				end
+			end
+	
+	        -- Grab phone numbers --
+		    for phone in string.gmatch(response.body, "%(%d%d%%d)%-%d%d%d%-%d%d%d%d") do
+				if phone then
+					table.insert(contacts, phone)
+				end
+			end
+	
+		    -- Grab phone numbers --
+		    for phone in string.gmatch(response.body, "%(%d%d%d%) %d%d%d%-%d%d%d%d") do
+				if phone then
+					table.insert(contacts, phone)
+				end
+	        end
+	
+		    -- Grab phone numbers --
+		    for phone in string.gmatch(response.body, "%d%d%d%-%d%d%d%-%d%d%d%d") do
+				if phone then
+					table.insert(contacts, phone)
+				end
+	        end
+		end
+	end
 
     if #contacts > 0 then
         return contacts
