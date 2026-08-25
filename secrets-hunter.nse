@@ -84,7 +84,7 @@ action = function(host, port)
 	        end
 	
 		    -- Adobe Client Id (Oauth Web) --
-			for secret in string.gmatch(response.body, "(adobe[%l%d_ %.%,%-]{0,25})(%=%>|:=|<=|=>|:).{0,5}[%'%"]([a-f0-9]%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x)[%'%"]") do
+			for secret in string.gmatch(response.body, "(adobe[%l%d_ %.%,%-]{0,25})(%=%>|:=|<=|=>|:).{0,5}[%'%"](%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x%x)[%'%"]") do
 				if secret then
 					table.insert(secrets, "Adobe Client Id (Oauth Web): " .. secret .. " | Path: " .. links[count])
 				end
