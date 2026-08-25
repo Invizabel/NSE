@@ -114,7 +114,7 @@ action = function(host, port)
 			-- Alchemi API Key --
 			for secret in string.gmatch(response.body, "(alchemi[%l%d_ %.%,%-]{0,25})(=>|<=).{0,5}(['\"])([%a%d%-]{32})(['\"])") do
 				if secret then
-					table.insert(secrets, Alchemi API Key: " .. secret .. " | Path: " .. links[count])
+					table.insert(secrets, "Alchemi API Key: " .. secret .. " | Path: " .. links[count])
 				end
 			end
 		end
