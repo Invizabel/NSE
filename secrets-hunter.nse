@@ -81,7 +81,7 @@ action = function(host, port)
 				if string.sub(link, 1, 1) == "/" then
 					table.insert(links, link)
 				end
-				if string.sub(link, 1, 4) ~= "http://" || string.sub(link, 1, 4) ~= "https://" then
+				if string.sub(link, 1, 7) ~= "http://" or string.sub(link, 1, 8) ~= "https://" then
 					table.insert(links, "/" .. link)
 				end
 	        end
