@@ -84,7 +84,7 @@ action = function(host, port)
 	        end
 	
 		    -- Adobe Client Id (Oauth Web) --
-			for secret in string.gmatch(response.body, "(adobe[%l%d_ %.%,%-]{0,25})(%=%>|<=|<=|=>|:).{0,5}(['"])([0-9A-Fa-f]{30})(['"])") do
+			for secret in string.gmatch(response.body, "(adobe[%l%d_ %.%,%-]{0,25})([=>]|[<=]|[<=]|[=>]|[:]).{0,5}(['"])([0-9A-Fa-f]{30})(['"])") do
 				if secret then
 					table.insert(secrets, "Adobe Client Id (Oauth Web): " .. secret .. " | Path: " .. links[count])
 				end
@@ -112,7 +112,7 @@ action = function(host, port)
 			end
 
 			-- Alchemi API Key --
-			for secret in string.gmatch(response.body, "(alchemi[%l%d_ %.%,%-]{0,25})(%=%>|<=|<=|=>|:).{0,5}(['"])([%a%d%-]{32})(['"])") do
+			for secret in string.gmatch(response.body, "(alchemi[%l%d_ %.%,%-]{0,25})([=>][<=][<=][=>][:]).{0,5}(['"])([%a%d%-]{32})(['"])") do
 				if secret then
 					table.insert(secrets, Alchemi API Key: " .. secret .. " | Path: " .. links[count])
 				end
