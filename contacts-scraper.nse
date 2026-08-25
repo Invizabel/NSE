@@ -74,10 +74,13 @@ action = function(host, port)
                 end
             end
 
-		    -- src --
+		     -- src --
 			for link in string.gmatch(response.body, 'src="([^"]+)"') do
 				if string.sub(link, 1, 1) == "/" then
 					table.insert(links, link)
+				end
+				if string.sub(link, 1, 4) ~= "http" then
+					table.insert(links, "/" .. link)
 				end
 	        end
 	
