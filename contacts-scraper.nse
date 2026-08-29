@@ -48,7 +48,7 @@ action = function(host, port)
 
     local options = {
         header = {
-            ["User-Agent"] = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:149.0) Gecko/20100101 Firefox/149.0"
+            ["User-Agent"] = "Mozilla/5.0 (X11; Linux x86_64; rv:154.0) Gecko/20100101 Firefox/154.0"
         },
 		no_cache = true,
 		bypass_cache = true
@@ -64,7 +64,8 @@ action = function(host, port)
             break
         end
 
-        local response = http.get(host.targetname, port.number, links[count], options)
+		local target = host.targetname or host.ip
+        local response = http.get(target, port.number, links[count], options)
         
         if response.status == 200 and response.body then
 			-- href --
