@@ -98,40 +98,4 @@ action = function(host, port)
                     return "Address: " .. host.ip .. " | Port: " .. port.number .. " | Response: " .. out
             end
     end
-    -- Check if server status is disabled
-    local s = nmap.new_socket()
-    s:set_timeout(10000)
-    
-    -- Connect to host --
-    local status, error = s:connect(target, port)
-    if not status then
-            return "Connect failed: " .. error
-    end
-    
-    -- Handshake --
-    local handshake_data = varint(0) .. varint(protocol) .. varstring(host.ip) .. string.pack(">H", port.number) .. varint(2)
-    local handshake = create_packet(handshake_data)
-    -- End of handshake code --
-    
-    -- Send hanshake --
-    s:send(handshake)
-
-    -- Send client hello --
-    local client_hello = create_packet(varint(0) .. varstring("Notch") .. "\x06\x9ay\xf4D\xe9G&\xa5\xbe\xfc\xa9\x0e8\xaa\xf5")
-    local status, error = s:send(client_hello)
-    
-    if not status then
-         return false, error
-    end
-    
-    local data = recieve_packet(s)
-    local out = stdnse.tohex(data):sub(-2)
-    s:close()
-
-    if out == "01" then
-        return "Address: " .. host.ip .. " | Port: " .. port.number .. " | Response: " .. "likely a minecraft server but we can't query status, is it disabled?"
-    end
-
-    -- Return no response detected --
-    return "No Response"
 end
