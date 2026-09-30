@@ -98,4 +98,6 @@ action = function(host, port)
                     return "Address: " .. host.ip .. " | Port: " .. port.number .. " | Response: " .. out
             end
     end
+
+	return "No response"
 end
