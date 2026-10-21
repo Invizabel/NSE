@@ -1,3 +1,4 @@
+local json = require "json"
 local stdnse = require "stdnse"
 
 -- HEAD --
@@ -52,13 +53,13 @@ local function recieve_packet(socket)
 end
 
 portrule = function(host, port)
-	return port.protocol == "tcp"
-		and port.state == "open"
+    return port.protocol == "tcp"
+        and port.state == "open"
 end
 
 -- ACTION --
 action = function(host, port)
-	local target = host.targetname or host.ip
+    local target = host.targetname or host.ip
 
     -- Create a socket  --
     local s = nmap.new_socket()
@@ -91,13 +92,27 @@ action = function(host, port)
     
     -- Return processed response --
     if data then
-            local start = data:find("{", 1, true)
-            if start then
-                    local out = data:sub(start)
-                    
-                    return "Address: " .. host.ip .. " | Port: " .. port.number .. " | Response: " .. out
-            end
-    end
+        local start = data:find("{", 1, true)
+        if start then
+            local out = data:sub(start)
+            local status, result = json.parse(out)
+            if status then
+                local version_name = result.version.name
+                local capture_float = string.match(version_name, "1.(%d?%d?%d)")
+                local digit = tonumber(capture_float)
+                local log4shell = false
 
-	return "No response"
+                if digit >= 7 and digit <= 18 then
+                    log4shell = true
+                end
+
+                local is_velocity = string.match(version_name, "Velocity")
+                if is_velocity then
+                    log4shell = "proxy"
+                end
+
+                return "Address: " .. host.ip .. " | Port: " .. port.number  .. " | Status: UP |" .. " Log4Shell: " .. tostring(log4shell) .. " (" .. version_name .. ")"
+            end
+        end
+    end
 end
