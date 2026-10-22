@@ -1,5 +1,4 @@
 local json = require "json"
-local stdnse = require "stdnse"
 
 -- HEAD --
 description = [[
@@ -71,7 +70,7 @@ action = function(host, port)
             return "Connect failed: " .. error
     end
     
-    local protocol = tonumber(stdnse.get_script_args("java.protocol")) or 777	
+    local protocol = 777	
 
     -- Handshake --
     local handshake_data = varint(0) .. varint(protocol) .. varstring(host.ip) .. string.pack(">H", port.number) .. varint(1)
