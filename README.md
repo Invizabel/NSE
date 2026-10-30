@@ -4,7 +4,7 @@
 * Minecraft Java Server Seeker
 
 ```
-nmap -Pn -p 25565 --script=mc-server-seeker.nse 192.168.1.1/24 | grep Log4Shell
+nmap -Pn -p 25565 -v --script=mc-server-seeker.nse 192.168.1.1/24 | grep Log4Shell
 ```
 
 #### contacts-scraper:
