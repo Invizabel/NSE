@@ -5,7 +5,7 @@
 
 ```
 nmap -p- -v --script=mc-server-seeker.nse 192.168.1.1/24 > out.txt
-cat out .txt | grep Log4Shell
+cat out.txt | grep Log4Shell
 ```
 
 #### contacts-scraper:
